@@ -2,6 +2,21 @@ pipeline {
     agent any
 
     stages {
+        stage('Build'){
+            agent {
+                docker {
+                    image "node:18-alpine"
+                    args '-u root:root'
+                }
+            }
+            steps {
+                sh '''
+                 ls -la
+                 npm run build
+                '''
+            }
+
+        }
         stage('Test'){
             agent 
             {
